@@ -55,40 +55,40 @@ Brief summary/description of the plugin.
             CSVReaderUtils.eachLine((CSVReader) delegate, closure)
         }
 
-        File.metaClass.eachCsvLine = { closure ->
+        File.metaClass.eachCsvLine = {Closure closure ->
             CSVReaderUtils.eachLine((File) delegate, closure)
         }
-        File.metaClass.toCsvReader = { settingsMap ->
+        File.metaClass.toCsvReader = {Map settingsMap ->
             return CSVReaderUtils.toCsvReader((File)delegate, settingsMap)
         }
-        File.metaClass.toCsvMapReader = { settingsMap ->
+        File.metaClass.toCsvMapReader = {Map settingsMap ->
             return new CSVMapReader(new FileReader(delegate),settingsMap)
         }
 
-        InputStream.metaClass.eachCsvLine = { closure ->
+        InputStream.metaClass.eachCsvLine = {Closure closure ->
             CSVReaderUtils.eachLine((InputStream) delegate, closure)
         }
-        InputStream.metaClass.toCsvReader = { settingsMap ->
+        InputStream.metaClass.toCsvReader = {Map settingsMap ->
             return CSVReaderUtils.toCsvReader((InputStream)delegate, settingsMap)
         }
 
-        Reader.metaClass.eachCsvLine = { closure ->
+        Reader.metaClass.eachCsvLine = {Closure closure ->
             CSVReaderUtils.eachLine((Reader)delegate, closure)
         }
-        Reader.metaClass.toCsvReader = { settingsMap ->
+        Reader.metaClass.toCsvReader = {Map settingsMap ->
             return CSVReaderUtils.toCsvReader((Reader)delegate, settingsMap)
         }
-        Reader.metaClass.toCsvMapReader = { settingsMap ->
+        Reader.metaClass.toCsvMapReader = {Map settingsMap ->
             return new CSVMapReader(delegate,settingsMap)
         }
 
-        String.metaClass.eachCsvLine = { closure ->
+        String.metaClass.eachCsvLine = {Closure closure ->
             CSVReaderUtils.eachLine((String) delegate, closure)
         }
-        String.metaClass.toCsvReader = { settingsMap ->
+        String.metaClass.toCsvReader = {Map settingsMap ->
             return CSVReaderUtils.toCsvReader((String)delegate, settingsMap)
         }
-        String.metaClass.toCsvMapReader = { settingsMap ->
+        String.metaClass.toCsvMapReader = {Map settingsMap ->
             return new CSVMapReader(new StringReader(delegate),settingsMap)
         }
 
