@@ -1,7 +1,7 @@
 package org.grails.plugins.csv
 
 
-class CSVMapReaderBatchTests extends GroovyTestCase {
+class CSVMapReaderBatchTest extends GroovyTestCase {
 
     void testBatchChunks() {
         def csv = new CSVMapReader(new StringReader(testCsv), [batchSize: 3])

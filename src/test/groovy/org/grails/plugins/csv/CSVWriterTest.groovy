@@ -1,6 +1,6 @@
 package org.grails.plugins.csv
 
-class CSVWriterTests extends GroovyTestCase {
+class CSVWriterTest extends GroovyTestCase {
 
 	void testBuilderSimple() {
 		assertCsv('"a","b"\n"1","2"', [[1,2]]) {

@@ -1,7 +1,7 @@
 package org.grails.plugins.csv
 
 
-class CSVMapReaderTests extends GroovyTestCase {
+class CSVMapReaderTest extends GroovyTestCase {
     protected void setUp() {
         super.setUp()
     }

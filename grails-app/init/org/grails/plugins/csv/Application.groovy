@@ -1,4 +1,4 @@
-package grails.csv
+package org.grails.plugins.csv
 
 import grails.boot.GrailsApp
 import grails.boot.config.GrailsAutoConfiguration

@@ -1,4 +1,4 @@
-package grails.csv
+package org.grails.plugins.csv
 
 import au.com.bytecode.opencsv.CSVReader
 import grails.plugins.*
@@ -9,7 +9,7 @@ import org.grails.plugins.csv.controller.RenderCsvMethod
 class GrailsCsvGrailsPlugin extends Plugin {
 
     // the version or versions of Grails the plugin is designed for
-    def grailsVersion = "3.0.2 > *"
+    def grailsVersion = "3.0.1 > *"
     // resources that are excluded from plugin packaging
     def pluginExcludes = [
         "grails-app/views/error.gsp"
@@ -22,7 +22,6 @@ class GrailsCsvGrailsPlugin extends Plugin {
     def description = '''\
 Brief summary/description of the plugin.
 '''
-    def profiles = ['web']
 
     // URL to the plugin's documentation
     def documentation = "http://grails.org/plugin/grails-csv"
@@ -110,9 +109,9 @@ Brief summary/description of the plugin.
     void onConfigChange(Map<String, Object> event) {
         // TODO Implement code that is executed when the project configuration changes.
         // The event is the same as for 'onChange'.
-        if (grailsApplication.isControllerClass(event.source)) {
-            event.source.metaClass.renderCsv = renderCsvMethod
-        }
+//        if (grailsApplication.isControllerClass(event.source)) {
+//            event.source.metaClass.renderCsv = renderCsvMethod
+//        }
     }
 
     void onShutdown(Map<String, Object> event) {

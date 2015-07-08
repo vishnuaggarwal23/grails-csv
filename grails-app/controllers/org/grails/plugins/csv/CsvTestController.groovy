@@ -1,9 +1,13 @@
-package grails.csv
+package org.grails.plugins.csv
 
 class CsvTestController {
 
+    static scope = "request"
+
     def index() {
-     render "Welcome to Grails CSV"
+        println "---------------------"
+        println grailsApplication.mainContext['org.grails.plugins.csv.CsvTestController']
+     render ("Welcome to Grails CSV"+ grailsApplication.config.spring.groovy.template)
     }
 
     def writeCsv = {
