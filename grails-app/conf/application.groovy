@@ -1,7 +1,7 @@
 grails {
     profile = 'web'
     codegen {
-        defaultPackage = 'org.grails.plugins'
+        defaultPackage = 'grails.plugins.csv'
     }
 }
 
