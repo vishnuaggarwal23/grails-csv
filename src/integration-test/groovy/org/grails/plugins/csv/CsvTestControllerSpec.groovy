@@ -10,17 +10,29 @@ import geb.spock.*
 @Rollback
 class CsvTestControllerSpec extends GebSpec {
 
-    def setup() {
-    }
+	def setup() {
+	}
 
-    def cleanup() {
-    }
+	def cleanup() {
+	}
 
-    void "canary test"() {
-        when:"The home page is visited"
-            go '/'
+	void "canary test"() {
+		when: "The home page is visited"
+		go '/'
 
-        then:"The title is correct"
-        	$('title').text() == "Welcome to Grails"
-    }
+		then: "The title is correct"
+		$('title').text() == "Welcome to Grails"
+	}
+
+	void "test writeCsv"(){
+		when: "writeCsv action is visited"
+			go '/csvTest/writeCsv'
+
+		then:
+			driver.pageSource.contains("\"x\",\"y\"")
+			driver.pageSource.contains("\"1\",\"2\"")
+			driver.pageSource.contains("\"3\",\"4\"")
+			driver.pageSource.contains("\"5\",\"6\"")
+
+	}
 }
