@@ -33,12 +33,7 @@ class CSVReaderUtilsIntegrationTest extends GroovyTestCase {
 
     @Test
     void testFileEachCsvLine() {
-        //
-        //Just to clarify it is sufficient to
-        // write
-        // this.class.getClassLoader().getResourceAsStream("my_xsl.xsl")
-        // if my_xsl.xsl is located at src/main/resource/my_xsl.xsl –  ubiquibacon Jun 1 at 18:56
-        def file = new File("resources/fileTest.csv")
+        def file = new File(this.class.classLoader.getResource('fileTest.csv').path)
         assertNotNull(file)
         assertTrue(file.exists())
         file.eachCsvLine { tokens ->
@@ -48,7 +43,7 @@ class CSVReaderUtilsIntegrationTest extends GroovyTestCase {
 
     @Test
     void testFileEachCsvLineWithSettings() {
-        def file = new File("resources/fileTest.csv")
+        def file = new File(this.class.classLoader.getResource('fileTest.csv').path)
         assertNotNull(file)
         assertTrue(file.exists())
 
@@ -59,7 +54,7 @@ class CSVReaderUtilsIntegrationTest extends GroovyTestCase {
 
     @Test
     void testInputStreamEachCsvLine() {
-        def is = new File("resources/fileTest.csv").newInputStream()
+        def is = this.class.classLoader.getResourceAsStream('fileTest.csv')
         assertNotNull(is)
         is.eachCsvLine { tokens ->
             assertEquals(4, tokens.length)
@@ -68,7 +63,7 @@ class CSVReaderUtilsIntegrationTest extends GroovyTestCase {
 
     @Test
     void testInputStreamEachCsvLineWithSettings() {
-        def is = new File("resources/fileTest.csv").newInputStream()
+        def is = this.class.classLoader.getResourceAsStream('fileTest.csv')
         assertNotNull(is)
         is.toCsvReader(['charset': 'UTF-8']).eachLine { tokens ->
             assertEquals(4, tokens.length)
@@ -77,7 +72,7 @@ class CSVReaderUtilsIntegrationTest extends GroovyTestCase {
 
     @Test
     void testReaderEachCsvLine() {
-        def reader = new FileReader(new File("resources/fileTest.csv"))
+        def reader = new FileReader(new File(this.class.classLoader.getResource('fileTest.csv').path))
         reader.eachCsvLine { tokens ->
             assertEquals(4, tokens.length)
         }
@@ -85,7 +80,7 @@ class CSVReaderUtilsIntegrationTest extends GroovyTestCase {
 
     @Test
     void testReaderEachCsvLineWithSettings() {
-        def reader = new FileReader(new File("resources/fileTest.csv"))
+        def reader = new FileReader(new File(this.class.classLoader.getResource('fileTest.csv').path))
         reader.toCsvReader(['charset': 'UTF-8']).eachLine { tokens ->
             assertEquals(4, tokens.length)
         }
@@ -100,6 +95,7 @@ class CSVReaderUtilsIntegrationTest extends GroovyTestCase {
         }
     }
 
+    @Test
     void testStringEachCsvLineWithSettings() {
         String csv = 'testx using "x" as ax separator char'
 

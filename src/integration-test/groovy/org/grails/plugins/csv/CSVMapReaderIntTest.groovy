@@ -8,7 +8,7 @@ class CSVMapReaderIntTest extends GroovyTestCase {
 
     @Test
     void testFileToCsvMapReader() {
-        def recs = new File("resources/mapTest.csv").toCsvMapReader().toList()
+        def recs = new File(this.class.classLoader.getResource('mapTest.csv').path).toCsvMapReader().toList()
         assert recs.size() == 2
         assertEquals([col1: 'val1', col2: 'val2', col3: 'val3'], recs[0])
     }
