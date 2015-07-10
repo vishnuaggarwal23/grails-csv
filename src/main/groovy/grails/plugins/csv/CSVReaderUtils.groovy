@@ -31,7 +31,7 @@ class CSVReaderUtils {
         try {
             String[] tokens = csvReader.readNext()
             while (tokens) {
-                c(tokens);
+                c.doCall(tokens);
                 tokens = csvReader.readNext();
             }
         } finally {

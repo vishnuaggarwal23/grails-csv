@@ -23,9 +23,8 @@ class CsvGrailsPlugin extends Plugin {
             "controllers"
     ]
 
-    // TODO Fill in these fields
-    def author = "Les Hazlewood"
-    def authorEmail = "les@katasoft.com"
+    def author = "Les Hazlewood, Stefan Armbruster"
+    def authorEmail = "les@katasoft.com, stefan@armbruster-it.de"
     def title = "Grails CSV Plugin"
     def description = '''
         The Grails CSV Plugin allows you to easily parse and consume CSV data from a number of input sources.  It
