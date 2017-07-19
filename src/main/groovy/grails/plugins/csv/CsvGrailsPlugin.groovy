@@ -11,7 +11,6 @@ class CsvGrailsPlugin extends Plugin {
     def grailsVersion = "3.0.1 > *"
     // resources that are excluded from plugin packaging
     def pluginExcludes = [
-            "grails-app/views/error.gsp",
             "grails-app/controllers/**/*"
     ]
 
