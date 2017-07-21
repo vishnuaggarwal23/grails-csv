@@ -7,7 +7,6 @@ import spock.lang.*
 import geb.spock.*
 
 @Integration
-@Rollback
 class CsvTestControllerGebSpec extends GebSpec {
 
 	def setup() {
