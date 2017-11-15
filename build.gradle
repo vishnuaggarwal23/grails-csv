@@ -16,7 +16,7 @@ plugins {
     id "com.jfrog.bintray" version "1.2"
 }
 
-version "1.0"
+version "1.0.1"
 group "org.grails.plugins"
 
 apply plugin: 'maven-publish'
@@ -72,4 +72,14 @@ dependencies {
 
 task wrapper(type: Wrapper) {
     gradleVersion = gradleWrapperVersion
+}
+
+bintray {
+    user = ''
+    key = ''
+    pkg {
+        repo = 'plugins'
+        userOrg = 'sachinverma'
+        licenses = ['Apache-2.0']
+    }
 }
