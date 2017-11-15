@@ -26,3 +26,6 @@ plugin.xml
 .classpath
 .project
 test/reports
+
+# gradle wrapper
+!gradle/wrapper/gradle-wrapper.jar
