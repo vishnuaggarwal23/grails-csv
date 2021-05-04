@@ -11,11 +11,12 @@ Add dependency to your build.gradle for Grails 3.x:
 ```
 repositories {
   ...
-  maven { url "http://dl.bintray.com/sachinverma/plugins" }
+  //maven { url "http://dl.bintray.com/sachinverma/plugins" } As Bintray services down so update with below repo url change.
+  maven { url "https://softclinic.jfrog.io/artifactory/grails-plugins-release" }
 }
 
 dependencies {
-    compile 'org.grails.plugins:grails-csv:1.0.1'
+    compile 'org.grails.plugins:csv:1.0.1'
 }
 ```
 
