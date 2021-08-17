@@ -22,56 +22,53 @@ import au.com.bytecode.opencsv.CSVReader
 /**
  * Utility class for adding CSV parsing capability to core Java/Groovy classes (String, File, InputStream, Reader).
  *
- * @since 0.1
- * @author Les Hazlewood
+ * @since 0.1* @author Les Hazlewood
  */
 class CSVReaderUtils {
-
-    public static void eachLine(CSVReader csvReader, Closure c) {
+    static void eachLine(CSVReader csvReader, Closure c) {
         try {
             String[] tokens = csvReader.readNext()
             while (tokens) {
-                c.doCall(tokens);
-                tokens = csvReader.readNext();
+                c.doCall(tokens)
+                tokens = csvReader.readNext()
             }
         } finally {
             csvReader.close()
         }
     }
 
-    public static void eachLine(File file, Closure c) {
-        eachLine(toCsvReader(file, null), c);
+    static void eachLine(File file, Closure c) {
+        eachLine(toCsvReader(file, null), c)
     }
 
-    public static void eachLine(InputStream is, Closure c) {
-        eachLine(toCsvReader(is, null), c);
+    static void eachLine(InputStream is, Closure c) {
+        eachLine(toCsvReader(is, null), c)
     }
 
-    public static void eachLine(Reader r, Closure c) {
-        eachLine(toCsvReader(r, null), c);
+    static void eachLine(Reader r, Closure c) {
+        eachLine(toCsvReader(r, null), c)
     }
 
-    public static void eachLine(String csv, Closure c) {
-        eachLine(toCsvReader(csv, null), c);
+    static void eachLine(String csv, Closure c) {
+        eachLine(toCsvReader(csv, null), c)
     }
 
-    public static CSVReader toCsvReader(File file, def settingsMap) {
+    static CSVReader toCsvReader(File file, def settingsMap) {
         return toCsvReader(new FileInputStream(file), settingsMap)
     }
 
-    public static CSVReader toCsvReader(InputStream is, def settingsMap) {
+    static CSVReader toCsvReader(InputStream is, def settingsMap) {
         def charset = settingsMap?.get('charset')
-        InputStreamReader reader;
+        InputStreamReader reader
         if (charset) {
             reader = new InputStreamReader(is, charset)
         } else {
             reader = new InputStreamReader(is)
         }
-        return toCsvReader(reader, settingsMap);
+        return toCsvReader(reader, settingsMap)
     }
 
-    public static CSVReader toCsvReader(Reader r, def settingsMap) {
-
+    static CSVReader toCsvReader(Reader r, def settingsMap) {
         char separatorChar = (settingsMap?.get('separatorChar') ?: CSVParser.DEFAULT_SEPARATOR) as char
         char quoteChar = (settingsMap?.get('quoteChar') ?: CSVParser.DEFAULT_QUOTE_CHARACTER) as char
         char escapeChar = (settingsMap?.get('escapeChar') ?: CSVParser.DEFAULT_ESCAPE_CHARACTER) as char
@@ -92,9 +89,7 @@ class CSVReaderUtils {
         return new CSVReader(r, separatorChar, quoteChar, escapeChar, skipLines, strictQuotes, ignoreLeadingWhiteSpace)
     }
 
-    public static CSVReader toCsvReader(String s, def settingsMap) {
+    static CSVReader toCsvReader(String s, def settingsMap) {
         return toCsvReader(new StringReader(s), settingsMap)
     }
-
-
 }

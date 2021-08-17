@@ -1,10 +1,9 @@
 package grails.plugins.csv
 
-import grails.test.mixin.TestFor
+import grails.testing.mixin.integration.Integration
 import spock.lang.Specification
 
-
-@TestFor(CsvTestController)
+@Integration
 class CsvTestControllerSpec extends Specification {
 
     def populateValidParams(params) {

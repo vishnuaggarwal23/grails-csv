@@ -16,17 +16,13 @@
  */
 package grails.plugins.csv
 
-import grails.test.mixin.TestFor
-import grails.test.mixin.integration.Integration
+import grails.testing.mixin.integration.Integration
 import org.junit.Test
-import org.springframework.core.io.ClassPathResource
-import org.springframework.core.io.Resource
 
 /**
  * Tests to verify dynamically added methods to Java/Groovy classes (String, InputStream, etc) work as expected
  *
- * @since 0.1
- * @author Les Hazlewood
+ * @since 0.1* @author Les Hazlewood
  */
 @Integration
 class CSVReaderUtilsIntegrationTest extends GroovyTestCase {

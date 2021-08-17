@@ -1,27 +1,21 @@
 package grails.plugins.csv
 
 import au.com.bytecode.opencsv.CSVReader
-import grails.core.GrailsApplication
-import grails.plugins.*
+import grails.plugins.Plugin
 import grails.plugins.csv.controller.RenderCsvMethod
 
 class CsvGrailsPlugin extends Plugin {
 
-    // the version or versions of Grails the plugin is designed for
-    def grailsVersion = "3.0.1 > *"
-    // resources that are excluded from plugin packaging
+    def grailsVersion = "4.0.0 > *"
     def pluginExcludes = [
             "grails-app/controllers/**/*"
     ]
-
     def observe = [
             "controllers"
     ]
-
     def loadAfter = [
             "controllers"
     ]
-
     def author = "Les Hazlewood, Stefan Armbruster"
     def authorEmail = "les@katasoft.com, stefan@armbruster-it.de"
     def title = "Grails CSV Plugin"
@@ -83,75 +77,55 @@ class CsvGrailsPlugin extends Plugin {
                    *Note that this option is ONLY valid for InputStream instances.  It is ignored otherwise.
 
     '''
-    // URL to the plugin's documentation
     def documentation = "http://grails.org/plugin/csv"
-
-    // Extra (optional) plugin metadata
-
-    // License: one of 'APACHE', 'GPL2', 'GPL3'
     def license = "APACHE"
-
-    // Details of company behind the plugin (if there is one)
-//    def organization = [ name: "My Company", url: "http://www.my-company.com/" ]
-
-    // Any additional developers beyond the author specified above.
     def developers = [
             [name: "Sachin Verma", email: "sachin.verma@tothenew.com"],
             [name: "Neha Gupta", email: "neha.gupta@tothenew.com"]
     ]
-
-    // Location of the plugin's issue tracker.
-    def issueManagement = [ system: "JIRA", url: "https://github.com/pedjak/grails-csv/issues" ]
-
-    // Online location of the plugin's browseable source code.
-    def scm = [ url: "https://github.com/pedjak/grails-csv/" ]
-
-    Closure doWithSpring() { {->
-            // TODO Implement runtime spring config (optional)
-        } 
-    }
+    def issueManagement = [system: "JIRA", url: "https://github.com/pedjak/grails-csv/issues"]
+    def scm = [url: "https://github.com/pedjak/grails-csv/"]
 
     void doWithDynamicMethods() {
-        // TODO Implement registering dynamic methods to classes (optional)
         CSVReader.metaClass.eachLine = { closure ->
             CSVReaderUtils.eachLine((CSVReader) delegate, closure)
         }
 
-        File.metaClass.eachCsvLine = {Closure closure ->
+        File.metaClass.eachCsvLine = { Closure closure ->
             CSVReaderUtils.eachLine((File) delegate, closure)
         }
-        File.metaClass.toCsvReader = {Map settingsMap ->
-            return CSVReaderUtils.toCsvReader((File)delegate, settingsMap)
+        File.metaClass.toCsvReader = { Map settingsMap ->
+            return CSVReaderUtils.toCsvReader((File) delegate, settingsMap)
         }
-        File.metaClass.toCsvMapReader = {Map settingsMap ->
-            return new CSVMapReader(new FileReader(delegate),settingsMap)
+        File.metaClass.toCsvMapReader = { Map settingsMap ->
+            return new CSVMapReader(new FileReader(delegate), settingsMap)
         }
 
-        InputStream.metaClass.eachCsvLine = {Closure closure ->
+        InputStream.metaClass.eachCsvLine = { Closure closure ->
             CSVReaderUtils.eachLine((InputStream) delegate, closure)
         }
-        InputStream.metaClass.toCsvReader = {Map settingsMap ->
-            return CSVReaderUtils.toCsvReader((InputStream)delegate, settingsMap)
+        InputStream.metaClass.toCsvReader = { Map settingsMap ->
+            return CSVReaderUtils.toCsvReader((InputStream) delegate, settingsMap)
         }
 
-        Reader.metaClass.eachCsvLine = {Closure closure ->
-            CSVReaderUtils.eachLine((Reader)delegate, closure)
+        Reader.metaClass.eachCsvLine = { Closure closure ->
+            CSVReaderUtils.eachLine((Reader) delegate, closure)
         }
-        Reader.metaClass.toCsvReader = {Map settingsMap ->
-            return CSVReaderUtils.toCsvReader((Reader)delegate, settingsMap)
+        Reader.metaClass.toCsvReader = { Map settingsMap ->
+            return CSVReaderUtils.toCsvReader((Reader) delegate, settingsMap)
         }
-        Reader.metaClass.toCsvMapReader = {Map settingsMap ->
-            return new CSVMapReader(delegate,settingsMap)
+        Reader.metaClass.toCsvMapReader = { Map settingsMap ->
+            return new CSVMapReader(delegate, settingsMap)
         }
 
-        String.metaClass.eachCsvLine = {Closure closure ->
+        String.metaClass.eachCsvLine = { Closure closure ->
             CSVReaderUtils.eachLine((String) delegate, closure)
         }
-        String.metaClass.toCsvReader = {Map settingsMap ->
-            return CSVReaderUtils.toCsvReader((String)delegate, settingsMap)
+        String.metaClass.toCsvReader = { Map settingsMap ->
+            return CSVReaderUtils.toCsvReader((String) delegate, settingsMap)
         }
-        String.metaClass.toCsvMapReader = {Map settingsMap ->
-            return new CSVMapReader(new StringReader(delegate),settingsMap)
+        String.metaClass.toCsvMapReader = { Map settingsMap ->
+            return new CSVMapReader(new StringReader(delegate), settingsMap)
         }
 
         grailsApplication.controllerClasses.each {
@@ -159,12 +133,7 @@ class CsvGrailsPlugin extends Plugin {
         }
     }
 
-    void doWithApplicationContext() {
-        // TODO Implement post initialization spring config (optional)
-    }
-
     void onChange(Map<String, Object> event) {
-        // TODO Implement code that is executed when any artefact that this plugin is
         // watching is modified and reloaded. The event contains: event.source,
         if (grailsApplication.isControllerClass(event.source)) {
             event.source.metaClass.renderCsv = renderCsvMethod
@@ -172,17 +141,11 @@ class CsvGrailsPlugin extends Plugin {
     }
 
     void onConfigChange(Map<String, Object> event) {
-        // TODO Implement code that is executed when the project configuration changes.
         // The event is the same as for 'onChange'.
         if (grailsApplication.isControllerClass(event.source)) {
             event.source.metaClass.renderCsv = renderCsvMethod
         }
     }
-
-    void onShutdown(Map<String, Object> event) {
-        // TODO Implement code that is executed when the application shuts down (optional)
-    }
-
 
     def renderCsvMethod = { Map args, Closure definition ->
         new RenderCsvMethod(delegate).call(args, definition)

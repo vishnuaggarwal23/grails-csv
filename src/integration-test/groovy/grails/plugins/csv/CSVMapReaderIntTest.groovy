@@ -1,6 +1,6 @@
 package grails.plugins.csv
 
-import grails.test.mixin.integration.Integration
+import grails.testing.mixin.integration.Integration
 import org.junit.Test
 
 @Integration
